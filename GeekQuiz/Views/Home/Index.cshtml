@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Play";
+}
+
+<div id="bodyContainer" ng-app="QuizApp">
+    <section id="content">
+        <div class="container">
+            <div class="row">
+                <div class="flip-container text-center col-md-12" ng-controller="QuizCtrl" ng-init="nextQuestion()">
+                    <div class="back" ng-class="{flip: answered, correct: correctAnswer, incorrect:!correctAnswer}">
+                        <p class="lead">{{answer()}}</p>
+                        <p>
+                            <button class="btn btn-info btn-lg next option" ng-click="nextQuestion()" ng-disabled="working">Next Question</button>
+                        </p>
+                    </div>
+                    <div class="front" ng-class="{flip: answered}">
+                        <p class="lead">{{title}}</p>
+                        <div class="row text-center">
+                            <button class="btn btn-info btn-lg option" ng-repeat="option in options" ng-click="sendAnswer(option)" ng-disabled="working">{{option.title}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/angular.js")
+    @Scripts.Render("~/Scripts/app/quiz-controller.js")
+}
+
+@*
+
+    Note: The AngularJS template is a declarative specification that uses information from
+    the model and the controller to transform static markup into the dynamic view that the
+    user sees in the browser. The following are examples of AngularJS elements and
+    element attributes that can be used in a template:
+
+    The ng-app directive tells AngularJS the DOM element that represents the root element of the application.
+    The ng-controller directive attaches a controller to the DOM at the point where the directive is declared.
+    The curly brace notation {{ }} denotes bindings to the scope properties defined in the controller.
+    The ng-click directive is used to invoke the functions defined in the scope in response to user clicks.
+
+
+
+
+*@
